@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>墨韵 · Mặc Vận — Ôn luyện từ vựng tiếng Trung</title>
+<title>汉语 — Ôn luyện từ vựng tiếng Trung</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@400;500;700&family=Zhi+Mang+Xing&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -12,30 +12,30 @@
 <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
 <style>
 :root{
-  --paper:#faf6ec;
-  --paper-2:#f2ead9;
-  --ink:#22201c;
-  --ink-soft:#5b564c;
+  --paper:#e9f1fb;
+  --paper-2:#d7e6f7;
+  --ink:#1c2430;
+  --ink-soft:#516079;
   --seal:#b8332a;
   --seal-dark:#8f261f;
   --jade:#3c6e5a;
   --jade-light:#e4efe9;
   --gold:#b98a2e;
-  --line:#ddd3ba;
+  --line:#c7d8ef;
   --card:#ffffff;
-  --shadow: 0 6px 24px rgba(34,32,28,.08);
+  --shadow: 0 6px 24px rgba(20,40,80,.10);
   --radius: 14px;
   --serif: 'Noto Serif SC', 'Songti SC', serif;
   --sans: 'Inter','Noto Sans SC', sans-serif;
   --brush: 'Zhi Mang Xing', cursive;
 }
 *{box-sizing:border-box;}
-html,body{margin:0;padding:0;}
+html,body{margin:0;padding:0; overflow-x:hidden;}
 body{
   background: var(--paper);
   background-image:
-    radial-gradient(circle at 10% 10%, rgba(184,51,42,.05), transparent 40%),
-    radial-gradient(circle at 90% 20%, rgba(60,110,90,.06), transparent 45%);
+    radial-gradient(circle at 10% 10%, rgba(60,110,180,.08), transparent 40%),
+    radial-gradient(circle at 90% 20%, rgba(184,51,42,.05), transparent 45%);
   color:var(--ink);
   font-family: var(--sans);
   min-height:100vh;
@@ -44,28 +44,51 @@ body{
 
 /* header */
 header.top{
-  padding:28px 24px 18px;
+  padding:20px 24px;
   border-bottom:1px solid var(--line);
   display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
-  position:sticky; top:0; background:rgba(250,246,236,.92); backdrop-filter: blur(6px); z-index:50;
+  position:sticky; top:0; background:rgba(233,241,251,.94); backdrop-filter: blur(6px); z-index:50;
 }
-.brand{display:flex; align-items:center; gap:14px;}
+.brand{display:flex; align-items:center; gap:12px; min-width:0;}
 .brand .seal-mark{
-  width:52px;height:52px;border-radius:8px;background:var(--seal);color:#fff;
+  width:46px;height:46px;border-radius:8px;background:var(--seal);color:#fff;
   display:flex;align-items:center;justify-content:center;font-family:var(--serif);
-  font-size:26px;font-weight:700;box-shadow: var(--shadow); flex-shrink:0;
-  transform:rotate(-2deg);
+  font-size:19px;font-weight:700;box-shadow: var(--shadow); flex-shrink:0;
+  transform:rotate(-2deg); letter-spacing:-1px;
 }
-.brand h1{font-family:var(--serif); font-size:22px; margin:0; letter-spacing:.5px;}
-.brand p{margin:2px 0 0; font-size:12.5px; color:var(--ink-soft);}
-nav.tabs{display:flex; gap:6px; flex-wrap:wrap;}
+.brand h1{font-family:var(--serif); font-size:21px; margin:0; letter-spacing:.5px; white-space:nowrap;}
+nav.tabs{display:flex; gap:6px; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%; padding-bottom:2px; scrollbar-width:thin;}
 nav.tabs button{
   border:1px solid var(--line); background:var(--card); color:var(--ink-soft);
   padding:9px 14px; border-radius:999px; cursor:pointer; font-size:13.5px; font-weight:500;
-  transition:.15s;
+  transition:.15s; flex-shrink:0; white-space:nowrap;
 }
 nav.tabs button:hover{border-color:var(--seal); color:var(--seal);}
 nav.tabs button.active{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+
+@media(max-width:720px){
+  header.top{flex-direction:column; align-items:flex-start; padding:16px 16px;}
+  nav.tabs{width:100%;}
+  main{padding:18px 14px 70px !important;}
+  h2.section-title{font-size:21px;}
+  .grid-stats{grid-template-columns:1fr 1fr; gap:10px;}
+  .word-list{grid-template-columns:1fr 1fr; gap:10px;}
+  .hw-layout{grid-template-columns:1fr;}
+  .toolbar{flex-direction:column; align-items:stretch;}
+  .toolbar input[type=search]{width:100%;}
+  .quiz-q{font-size:38px;}
+  .flashcard{max-width:100%; min-height:230px; padding:20px;}
+  .flashcard .hz-big{font-size:48px;}
+  .flash-controls{justify-content:stretch;}
+  .flash-controls .btn{flex:1 1 40%;}
+  .dict-search{flex-direction:column; align-items:stretch;}
+  .trans-grid{grid-template-columns:1fr 1fr;}
+  table{font-size:12px;}
+}
+@media(max-width:420px){
+  .grid-stats{grid-template-columns:1fr;}
+  .word-list{grid-template-columns:1fr;}
+}
 
 main{max-width:1160px; margin:0 auto; padding:26px 24px 80px;}
 .view{display:none;}
@@ -214,10 +237,9 @@ footer.foot{text-align:center; color:var(--ink-soft); font-size:12px; padding:30
 
 <header class="top">
   <div class="brand">
-    <div class="seal-mark">墨</div>
+    <div class="seal-mark">汉</div>
     <div>
-      <h1>墨韵 · Mặc Vận</h1>
-      <p>Ôn luyện từ vựng &amp; chữ Hán một cách trực quan</p>
+      <h1>汉语</h1>
     </div>
   </div>
   <nav class="tabs" id="tabs">
@@ -387,7 +409,7 @@ footer.foot{text-align:center; color:var(--ink-soft); font-size:12px; padding:30
 </section>
 
 </main>
-<footer class="foot">墨韵 · Mặc Vận — Công cụ ôn tập từ vựng tiếng Trung, chạy hoàn toàn trên trình duyệt của bạn.</footer>
+<footer class="foot">汉语 — Công cụ ôn tập từ vựng tiếng Trung, chạy hoàn toàn trên trình duyệt của bạn.</footer>
 
 <script>
 /* ============================= DATA ============================= */
